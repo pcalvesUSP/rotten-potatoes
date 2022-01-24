@@ -65,4 +65,12 @@ jobs:
           method: kubeconfig
           # Contents of kubeconfig file
           kubeconfig: ${{ secrets.KUBECONFIG_TXT }}
-          
+      
+      - name: Deploy to Kubernetes cluster
+        uses: Azure/k8s-deploy@v1.5
+        with:
+          # Path to the manifest files which will be used for deployment.
+          manifests: ./k8s/deployment.yaml
+          # Fully qualified resource URL of the image(s) to be used for substitutions on the manifest files Example: contosodemo.azurecr.io/helloworld:test
+          images: priscilaalv/rotten-potatoes:v${{ github.run_number }}
+
