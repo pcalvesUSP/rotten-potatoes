@@ -54,7 +54,7 @@ spec:
     spec:
       containers:
       - name: rotten-potatoes
-        image: priscilaalv/rotten-potatoes:v1
+        image: priscilaalv/rotten-potatoes:latest
         ports:
         - containerPort: 5000
         env:
