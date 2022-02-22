@@ -17,7 +17,10 @@ services:
    restart: always
    environment:
      MONGODB_HOST: mongodb
-   
+     MONGODB_PORT: 27017
+     MONGODB_USERNAME: mongouser
+     MONGODB_PASSWORD: mongopwd
+
   mongodb:
     image: mongo:5.0.6
     ports: 
@@ -30,16 +33,3 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongouser
       MONGO_INITDB_ROOT_PASSWORD: mongopwd
-
-  mongo-express:
-    image: mongo-express:0.54
-    ports:
-    - 8081:8081
-    networks:
-    - my-netservivces
-    environment:
-      ME_CONFIG_OPTIONS_EDITORTHEME: default
-      ME_CONFIG_BASICAUTH_USERNAME: mongouser
-      ME_CONFIG_BASICAUTH_PASSWORD: mongopwd
-      ME_CONFIG_MONGODB_SERVER: mongodb
-      ME_CONFIG_MONGODB_AUTH_DATABASE: db
