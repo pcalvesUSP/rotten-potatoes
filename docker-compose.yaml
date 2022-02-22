@@ -1,0 +1,45 @@
+version: '3.8'
+
+volumes:
+  mongo_vol:
+
+networks:
+   my-netservivces:
+      driver: bridge
+
+services:
+  python:
+   image: priscilaalv/rotten-potatoes:v1
+   ports:
+   - 5000:5000
+   networks:
+    - my-netservivces
+   restart: always
+   environment:
+     MONGODB_HOST: mongodb
+   
+  mongodb:
+    image: mongo:5.0.6
+    ports: 
+    - 27017:27017
+    networks:
+    - my-netservivces
+    volumes:
+    - mongo_vol:/data/db
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongouser
+      MONGO_INITDB_ROOT_PASSWORD: mongopwd
+
+  mongo-express:
+    image: mongo-express:0.54
+    ports:
+    - 8081:8081
+    networks:
+    - my-netservivces
+    environment:
+      ME_CONFIG_OPTIONS_EDITORTHEME: default
+      ME_CONFIG_BASICAUTH_USERNAME: mongouser
+      ME_CONFIG_BASICAUTH_PASSWORD: mongopwd
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_AUTH_DATABASE: db
