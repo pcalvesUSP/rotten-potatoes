@@ -12,5 +12,5 @@ MONGODB_USERNAME => Usuário do MongoDB
 
 MONGODB_PASSWORD => Senha do MongoDB
 
-##Deploy da aplicação com um único comando
+## Deploy da aplicação com um único comando
 docker-compose up -d (deve ser executado na pasta raiz do projeto)
